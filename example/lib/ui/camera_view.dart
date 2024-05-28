@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:image/image.dart';
 import 'package:flutter_pytorch/pigeon.dart';
 import 'package:flutter_pytorch/flutter_pytorch.dart';
-import 'package:flutter_pytorch_example/utils/image_utils.dart';
 
 import 'camera_view_singleton.dart';
 
@@ -18,6 +17,7 @@ class CameraView extends StatefulWidget {
 
   /// Constructor
   const CameraView(this.resultsCallback, this.resultsCallbackClassification);
+
   @override
   _CameraViewState createState() => _CameraViewState();
 }
@@ -36,6 +36,7 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   ClassificationModel? _imageModel;
 
   bool classification = false;
+
   @override
   void initState() {
     super.initState();

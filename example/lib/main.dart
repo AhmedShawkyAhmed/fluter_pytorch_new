@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pytorch_example/RunModelByCameraDemo.dart';
 import 'package:flutter_pytorch_example/RunModelByImageDemo.dart';
 
-void main() => runApp(ChooseDemo());
+void main() => runApp(const ChooseDemo());
 
 class ChooseDemo extends StatefulWidget {
   const ChooseDemo({Key? key}) : super(key: key);
@@ -34,7 +34,7 @@ class _ChooseDemoState extends State<ChooseDemo> {
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.blue,
                     ),
-                    child: Text(
+                    child: const Text(
                       "Run Model with Camera",
                       style: TextStyle(
                         color: Colors.white,
@@ -51,7 +51,7 @@ class _ChooseDemoState extends State<ChooseDemo> {
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.blue,
                     ),
-                    child: Text(
+                    child: const Text(
                       "Run Model with Image",
                       style: TextStyle(
                         color: Colors.white,

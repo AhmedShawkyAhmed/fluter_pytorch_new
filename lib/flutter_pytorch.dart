@@ -1,4 +1,3 @@
-
 import 'flutter_pytorch_platform_interface.dart';
 import 'dart:async';
 import 'dart:io';
@@ -31,6 +30,7 @@ class FlutterPytorch {
       String path, int imageWidth, int imageHeight,
       {String? labelPath}) async {
     String absPathModelPath = await _getAbsolutePath(path);
+
     int index = await ModelApi()
         .loadModel(absPathModelPath, null, imageWidth, imageHeight);
     List<String> labels = [];
@@ -49,10 +49,10 @@ class FlutterPytorch {
   static Future<ModelObjectDetection> loadObjectDetectionModel(
       String path, int numberOfClasses, int imageWidth, int imageHeight,
       {String? labelPath}) async {
-    String absPathModelPath = await _getAbsolutePath(path);
+    // String absPathModelPath = await _getAbsolutePath(path);
 
     int index = await ModelApi()
-        .loadModel(absPathModelPath, numberOfClasses, imageWidth, imageHeight);
+        .loadModel(path, numberOfClasses, imageWidth, imageHeight);
     List<String> labels = [];
     if (labelPath != null) {
       if (labelPath.endsWith(".txt")) {
@@ -70,7 +70,7 @@ class FlutterPytorch {
     ByteData data = await rootBundle.load(path);
     //copy asset to documents directory
     List<int> bytes =
-    data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
     //create non existant directories
     List split = path.split("/");
@@ -87,6 +87,7 @@ class FlutterPytorch {
     return dirPath;
   }
 }
+
 Future<List<String>> _getLabelsCsv(String labelPath) async {
   String labelsData = await rootBundle.loadString(labelPath);
   return labelsData.split(",");
@@ -117,12 +118,13 @@ class CustomModel {
 class ClassificationModel {
   final int _index;
   final List<String> labels;
+
   ClassificationModel(this._index, this.labels);
 
   ///predicts image and returns the supposed label belonging to it
   Future<String> getImagePrediction(Uint8List imageAsBytes,
       {List<double> mean = TORCHVISION_NORM_MEAN_RGB,
-        List<double> std = TORCHVISION_NORM_STD_RGB}) async {
+      List<double> std = TORCHVISION_NORM_STD_RGB}) async {
     // Assert mean std
     assert(mean.length == 3, "mean should have size of 3");
     assert(std.length == 3, "std should have size of 3");
@@ -145,7 +147,7 @@ class ClassificationModel {
   ///predicts image but returns the raw net output
   Future<List<double?>?> getImagePredictionList(Uint8List imageAsBytes,
       {List<double> mean = TORCHVISION_NORM_MEAN_RGB,
-        List<double> std = TORCHVISION_NORM_STD_RGB}) async {
+      List<double> std = TORCHVISION_NORM_STD_RGB}) async {
     // Assert mean std
     assert(mean.length == 3, "Mean should have size of 3");
     assert(std.length == 3, "STD should have size of 3");
@@ -159,7 +161,7 @@ class ClassificationModel {
   Future<List<double?>?> getImagePredictionListProbabilities(
       Uint8List imageAsBytes,
       {List<double> mean = TORCHVISION_NORM_MEAN_RGB,
-        List<double> std = TORCHVISION_NORM_STD_RGB}) async {
+      List<double> std = TORCHVISION_NORM_STD_RGB}) async {
     // Assert mean std
     assert(mean.length == 3, "Mean should have size of 3");
     assert(std.length == 3, "STD should have size of 3");
@@ -187,7 +189,7 @@ class ClassificationModel {
   Future<String> getImagePredictionFromBytesList(
       List<Uint8List> imageAsBytesList, int imageWidth, int imageHeight,
       {List<double> mean = TORCHVISION_NORM_MEAN_RGB,
-        List<double> std = TORCHVISION_NORM_STD_RGB}) async {
+      List<double> std = TORCHVISION_NORM_STD_RGB}) async {
     // Assert mean std
     assert(mean.length == 3, "mean should have size of 3");
     assert(std.length == 3, "std should have size of 3");
@@ -211,7 +213,7 @@ class ClassificationModel {
   Future<List<double?>?> getImagePredictionListFromBytesList(
       List<Uint8List> imageAsBytesList, int imageWidth, int imageHeight,
       {List<double> mean = TORCHVISION_NORM_MEAN_RGB,
-        List<double> std = TORCHVISION_NORM_STD_RGB}) async {
+      List<double> std = TORCHVISION_NORM_STD_RGB}) async {
     // Assert mean std
     assert(mean.length == 3, "Mean should have size of 3");
     assert(std.length == 3, "STD should have size of 3");
@@ -225,7 +227,7 @@ class ClassificationModel {
   Future<List<double?>?> getImagePredictionListProbabilitiesFromBytesList(
       List<Uint8List> imageAsBytesList, int imageWidth, int imageHeight,
       {List<double> mean = TORCHVISION_NORM_MEAN_RGB,
-        List<double> std = TORCHVISION_NORM_STD_RGB}) async {
+      List<double> std = TORCHVISION_NORM_STD_RGB}) async {
     // Assert mean std
     assert(mean.length == 3, "Mean should have size of 3");
     assert(std.length == 3, "STD should have size of 3");
@@ -263,11 +265,11 @@ class ModelObjectDetection {
   Future<List<ResultObjectDetection?>> getImagePrediction(
       Uint8List imageAsBytes,
       {double minimumScore = 0.5,
-        double IOUThershold = 0.5,
-        int boxesLimit = 10}) async {
+      double IOUThershold = 0.5,
+      int boxesLimit = 10}) async {
     List<ResultObjectDetection?> prediction = await ModelApi()
         .getImagePredictionListObjectDetection(_index, imageAsBytes, null, null,
-        null, minimumScore, IOUThershold, boxesLimit);
+            null, minimumScore, IOUThershold, boxesLimit);
 
     for (var element in prediction) {
       element?.className = labels[element.classIndex];
@@ -280,11 +282,11 @@ class ModelObjectDetection {
   Future<List<ResultObjectDetection?>> getImagePredictionFromBytesList(
       List<Uint8List> imageAsBytesList, int imageWidth, int imageHeight,
       {double minimumScore = 0.5,
-        double IOUThershold = 0.5,
-        int boxesLimit = 10}) async {
+      double IOUThershold = 0.5,
+      int boxesLimit = 10}) async {
     List<ResultObjectDetection?> prediction = await ModelApi()
         .getImagePredictionListObjectDetection(_index, null, imageAsBytesList,
-        imageWidth, imageHeight, minimumScore, IOUThershold, boxesLimit);
+            imageWidth, imageHeight, minimumScore, IOUThershold, boxesLimit);
 
     for (var element in prediction) {
       element?.className = labels[element.classIndex];
@@ -297,11 +299,11 @@ class ModelObjectDetection {
   Future<List<ResultObjectDetection?>> getImagePredictionList(
       Uint8List imageAsBytes,
       {double minimumScore = 0.5,
-        double IOUThershold = 0.5,
-        int boxesLimit = 10}) async {
+      double IOUThershold = 0.5,
+      int boxesLimit = 10}) async {
     final List<ResultObjectDetection?> prediction = await ModelApi()
         .getImagePredictionListObjectDetection(_index, imageAsBytes, null, null,
-        null, minimumScore, IOUThershold, boxesLimit);
+            null, minimumScore, IOUThershold, boxesLimit);
     return prediction;
   }
 
@@ -309,11 +311,11 @@ class ModelObjectDetection {
   Future<List<ResultObjectDetection?>> getImagePredictionListFromBytesList(
       List<Uint8List> imageAsBytesList, int imageWidth, int imageHeight,
       {double minimumScore = 0.5,
-        double IOUThershold = 0.5,
-        int boxesLimit = 10}) async {
+      double IOUThershold = 0.5,
+      int boxesLimit = 10}) async {
     final List<ResultObjectDetection?> prediction = await ModelApi()
         .getImagePredictionListObjectDetection(_index, null, imageAsBytesList,
-        imageWidth, imageHeight, minimumScore, IOUThershold, boxesLimit);
+            imageWidth, imageHeight, minimumScore, IOUThershold, boxesLimit);
     return prediction;
   }
 
@@ -345,9 +347,9 @@ class ModelObjectDetection {
             height: factorY,
             child: Container(
                 child: Image.file(
-                  _image,
-                  fit: BoxFit.fill,
-                )),
+              _image,
+              fit: BoxFit.fill,
+            )),
           ),
           ..._recognitions.map((re) {
             if (re == null) {
@@ -357,11 +359,11 @@ class ModelObjectDetection {
             if (boxesColor == null) {
               //change colors for each label
               usedColor = Colors.primaries[
-              ((re.className ?? re.classIndex.toString()).length +
-                  (re.className ?? re.classIndex.toString())
-                      .codeUnitAt(0) +
-                  re.classIndex) %
-                  Colors.primaries.length];
+                  ((re.className ?? re.classIndex.toString()).length +
+                          (re.className ?? re.classIndex.toString())
+                              .codeUnitAt(0) +
+                          re.classIndex) %
+                      Colors.primaries.length];
             } else {
               usedColor = boxesColor;
             }
@@ -493,4 +495,3 @@ class ModelObjectDetection {
 
  */
 }
-

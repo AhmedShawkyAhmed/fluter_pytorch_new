@@ -9,6 +9,8 @@ import 'package:flutter_pytorch/flutter_pytorch.dart';
 
 
 class RunModelByImageDemo extends StatefulWidget {
+  const RunModelByImageDemo({super.key});
+
   @override
   _RunModelByImageDemoState createState() => _RunModelByImageDemoState();
 }
@@ -20,7 +22,7 @@ class _RunModelByImageDemoState extends State<RunModelByImageDemo> {
   String? _imagePrediction;
   List? _prediction;
   File? _image;
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   bool objectDetection = false;
   List<ResultObjectDetection?> objDetect = [];
   @override
