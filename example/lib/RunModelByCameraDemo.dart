@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pytorch/pigeon.dart';
+import 'package:flutter_pytorch_new/pigeon.dart';
 import 'package:flutter_pytorch_example/ui/box_widget.dart';
 
 import 'ui/camera_view.dart';

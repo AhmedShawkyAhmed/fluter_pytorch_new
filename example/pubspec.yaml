@@ -21,7 +21,7 @@ dependencies:
   path_provider: ^2.0.2
   camera: ^0.9.8+1
   image: ^3.0.2
-  flutter_pytorch:
+  flutter_pytorch_new:
     # When depending on this package from a real application you should use:
     #   flutter_pytorch: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints

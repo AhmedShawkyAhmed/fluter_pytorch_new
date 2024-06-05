@@ -1,7 +1,7 @@
 name: flutter_pytorch_new
 description: A flutter plugin for run object detection and image classifications from pytorch models like yolov5.
 version: 1.0.0
-homepage: "https://github.com/AneeqMalik/flutter_pytorch.git"
+homepage: "https://github.com/shalabym970/fluter_pytorch_new.git"
 
 environment:
   sdk: '>=2.18.5 <3.0.0'

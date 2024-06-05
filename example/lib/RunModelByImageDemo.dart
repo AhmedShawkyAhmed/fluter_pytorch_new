@@ -4,8 +4,8 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_pytorch/pigeon.dart';
-import 'package:flutter_pytorch/flutter_pytorch.dart';
+import 'package:flutter_pytorch_new/pigeon.dart';
+import 'package:flutter_pytorch_new/flutter_pytorch.dart';
 
 
 class RunModelByImageDemo extends StatefulWidget {
