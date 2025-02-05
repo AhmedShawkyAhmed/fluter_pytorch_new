@@ -4,8 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart';
-import 'package:flutter_pytorch_new/pigeon.dart';
-import 'package:flutter_pytorch_new/flutter_pytorch.dart';
+import 'package:flutter_pytorch/pigeon.dart';
+import 'package:flutter_pytorch/flutter_pytorch.dart';
 
 import 'camera_view_singleton.dart';
 

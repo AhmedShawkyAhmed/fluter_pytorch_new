@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pytorch_new/pigeon.dart';
+import 'package:flutter_pytorch/pigeon.dart';
 import 'camera_view_singleton.dart';
 
 /// Individual bounding box

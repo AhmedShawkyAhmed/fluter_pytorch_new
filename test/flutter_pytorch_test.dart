@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_pytorch_new/flutter_pytorch.dart';
+import 'package:flutter_pytorch/flutter_pytorch.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('pytorch_lite');
