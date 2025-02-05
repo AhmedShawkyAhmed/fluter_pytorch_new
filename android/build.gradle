@@ -1,3 +1,5 @@
+package android
+
 group 'com.aneeqmalik.flutter_pytorch'
 version '1.0'
 
@@ -22,6 +24,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
+    namespace "com.aneeqmalik.flutter_pytorch"
     compileSdkVersion 31
 
     compileOptions {
